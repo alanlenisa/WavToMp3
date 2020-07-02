@@ -8,14 +8,23 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
+using System.Linq;
+
 namespace WavToMP3
 {
     public partial class MainForm : Form
     {
+        private static Random random = new Random();
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
         public MainForm()
         {
             InitializeComponent();
-            Text = "Wav2Mp3 v1.9";
+            Text = "Wav2Mp3 v1.10";
             textBox2.Text = "https://www.youtube.com/watch?v=t-hTrgAJXTs";
         }
 
@@ -129,7 +138,7 @@ namespace WavToMP3
         {
             var youTube = VideoLibrary.YouTube.Default; // starting point for YouTube actions
             var video = youTube.GetVideo(link); // gets a Video object with info about the video
-            String videoTmp = @"C:\temp\" + video.FullName;
+            String videoTmp = @"C:\temp\" + RandomString (5) +video.FullName;
             File.WriteAllBytes(videoTmp, video.GetBytes());
             //string videoTmp =@"c:\temp\Che cos'è la vera ricchezza_ - YouTube.mp4";
             return videoTmp;
