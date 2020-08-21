@@ -24,7 +24,7 @@ namespace WavToMP3
         public MainForm()
         {
             InitializeComponent();
-            Text = "Wav2Mp3 v1.10";
+            Text = "Wav2Mp3 v1.11";
             textBox2.Text = "https://www.youtube.com/watch?v=t-hTrgAJXTs";
         }
 
